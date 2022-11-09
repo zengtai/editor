@@ -22,14 +22,23 @@ export default function SearchPanel({ data }) {
   }, [isOpen]);
 
   let names = data.games.map((i) => ({
-    name: i.appid,
+    name: i.title,
+    id: i.appid,
     category: i.category,
+    slug: i.slug,
   }));
-  let categories = data.categories.map((i) => i.toLowerCase());
+  // let categories = data.categories.map((i) => i.toLowerCase());
 
   const filteredGames = query
     ? //
-      names.filter((i) => i.name.toLowerCase().includes(query.toLowerCase()))
+      names
+        .filter((i) => i.name.toLowerCase().includes(query.toLowerCase()))
+        .sort((a, b) =>
+          a.name.toLowerCase().indexOf(query.toLowerCase()) >
+          b.name.toLowerCase().indexOf(query.toLowerCase())
+            ? 1
+            : -1
+        )
     : [];
 
   // console.log(`data: `, data);
@@ -103,7 +112,7 @@ export default function SearchPanel({ data }) {
                 className="py-4 text-sm max-h-96 overflow-y-auto"
               >
                 {filteredGames.map((game) => (
-                  <Combobox.Option key={game.name} value={game.name}>
+                  <Combobox.Option key={game.id} value={game.slug}>
                     {({ active }) => (
                       <div
                         className={`flex items-center px-4 py-2 space-x-1 ${
@@ -116,7 +125,7 @@ export default function SearchPanel({ data }) {
                             IMAGE_PATH +
                             IMAGE_FORMAT +
                             `/` +
-                            game.name +
+                            game.id +
                             `.` +
                             IMAGE_FORMAT
                           }

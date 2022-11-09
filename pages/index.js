@@ -63,10 +63,10 @@ export default function Home({ data, originalData }) {
                     }
                     width={100}
                     height={100}
-                    alt={game.appid}
+                    alt={game.title}
                   />
                   <div className="meta">
-                    <h3>{game.appid}</h3>
+                    <h3>{game.title}</h3>
                     <span className="category">{game.category}</span>
                   </div>
                   <div className="meta">
