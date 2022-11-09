@@ -11,14 +11,24 @@ export default function SearchPanel({ data }) {
   const [query, setQuery] = useState("");
 
   useEffect(() => {
+    let btn = document.querySelector(`.search-btn`);
+
     function onKeydown(event) {
       if (event.key === "k" && (event.metaKey || event.ctrlKey)) {
         setIsOpen(!isOpen);
       }
     }
+
+    function handleClick() {
+      setIsOpen(!isOpen);
+    }
+
     window.addEventListener(`keydown`, onKeydown);
+
+    btn && btn.addEventListener(`click`, handleClick);
     return () => {
       window.removeEventListener(`keydown`, onKeydown);
+      btn && btn.removeEventListener(`click`, handleClick);
     };
   }, [isOpen]);
 

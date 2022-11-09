@@ -15,7 +15,9 @@ h2 {
     @apply break-words mb-2;
   }
 }
-
+kbd {
+  @apply border-x border-t border-b-2 shadow-sm p-1 rounded-sm bg-white mx-1 font-serif;
+}
 .category-list {
   @apply flex gap-4 flex-wrap mx-2 p-4 bg-slate-200 rounded-lg;
   .list-item {
