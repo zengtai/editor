@@ -11,6 +11,9 @@ h2 {
 }
 .section-body {
   @apply mx-2 mb-4 p-4 bg-slate-200 rounded-lg;
+  p {
+    @apply break-words mb-2;
+  }
 }
 
 .category-list {

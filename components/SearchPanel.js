@@ -3,6 +3,7 @@ import { useState, useEffect, Fragment } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { IMAGE_FORMAT, IMAGE_PATH } from "../lib/constants";
+import { toSlug, toTitle } from "../lib/api/v1";
 
 export default function SearchPanel({ data }) {
   const router = useRouter();
@@ -21,18 +22,22 @@ export default function SearchPanel({ data }) {
     };
   }, [isOpen]);
 
-  let names = data.games.map((i) => ({
-    name: i.title,
-    id: i.appid,
-    category: i.category,
-    slug: i.slug,
-  }));
+  let names = data;
+
+  // let names = data.map((i) => ({
+  //   id: i.id,
+  //   category: i.category,
+  //   name: toTitle(i.id),
+  //   slug: toSlug(toTitle(i.id)),
+  // }));
+
   // let categories = data.categories.map((i) => i.toLowerCase());
 
   const filteredGames = query
     ? //
       names
         .filter((i) => i.name.toLowerCase().includes(query.toLowerCase()))
+        .sort((a, b) => (a.name < b.name ? 1 : -1))
         .sort((a, b) =>
           a.name.toLowerCase().indexOf(query.toLowerCase()) >
           b.name.toLowerCase().indexOf(query.toLowerCase())

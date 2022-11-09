@@ -8,12 +8,18 @@ import SearchPanel from "../components/SearchPanel";
 export default function Home({ data, originalData }) {
   console.log("data: ", data);
   console.log("originalData: ", originalData.length);
+  let dataForSearch = data.games.map((i) => ({
+    id: i.appid,
+    category: i.category,
+    name: i.title,
+    slug: i.slug,
+  }));
   return (
     <>
       <Head>
         <title>Home</title>
       </Head>{" "}
-      <SearchPanel data={data} />
+      <SearchPanel data={dataForSearch} />
       <div className="bg-slate-50 flex flex-col min-h-screen">
         <header className="site-header">
           <div className="container mx-auto"></div>
