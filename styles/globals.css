@@ -1,3 +1,58 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.section-head {
+  @apply mx-4 flex space-x-2 items-center justify-between;
+}
+
+h2 {
+  @apply text-xl font-bold my-4;
+}
+.section-body {
+  @apply mx-2 mb-4 p-4 bg-slate-200 rounded-lg;
+}
+
+.category-list {
+  @apply flex gap-4 flex-wrap mx-2 p-4 bg-slate-200 rounded-lg;
+  .list-item {
+    @apply py-1 px-2  rounded-md;
+  }
+  .current {
+    @apply bg-slate-300;
+  }
+}
+
+.game-list {
+  @apply grid grid-cols-2 xl:grid-cols-6 gap-2 mx-2;
+  .list-item {
+    @apply bg-white shadow-md p-4 flex flex-col items-center;
+  }
+}
+
+li {
+  img {
+    @apply rounded-lg;
+  }
+  .meta {
+    @apply flex-col md:flex-row flex mt-3 gap-1 w-full justify-between items-center;
+  }
+  .rating {
+    @apply pl-7 bg-no-repeat font-semibold;
+  }
+  .played {
+    @apply text-gray-400 text-xs;
+  }
+  .play {
+    @apply my-3;
+    span {
+      @apply py-2 px-4 bg-cyan-600 shadow-md rounded-full text-white;
+    }
+  }
+  h3 {
+    @apply font-bold text-sm;
+  }
+  .category {
+    @apply px-1.5 py-1 bg-slate-100 text-xs;
+  }
+}
