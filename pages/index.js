@@ -19,7 +19,7 @@ export default function Home({ data, originalData }) {
     <>
       <Head>
         <title>Home</title>
-      </Head>{" "}
+      </Head>
       <SearchPanel data={dataForSearch} />
       <div className="bg-slate-50 flex flex-col min-h-screen">
         <header className="site-header">
