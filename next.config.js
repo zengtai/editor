@@ -9,6 +9,7 @@ const nextConfig = {
         hostname: `cdn.iwantalipstick.com`,
       },
     ],
+    unoptimized: true,
   },
 };
 
