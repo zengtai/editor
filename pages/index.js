@@ -176,11 +176,13 @@ export const getStaticProps = async (ctx) => {
   const data = await localCache();
   const games = data.games;
   const categories = data.categories;
+  const search = data.search;
   return {
     props: {
       data: {
         games,
         categories,
+        search,
       },
       originalData: [...data.original],
     },

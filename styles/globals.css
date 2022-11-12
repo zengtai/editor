@@ -6,6 +6,7 @@
   @apply mx-4 flex space-x-2 items-center justify-between;
 }
 
+h1,
 h2 {
   @apply text-xl font-bold my-4;
 }
@@ -30,7 +31,7 @@ kbd {
 
 .game-list {
   @apply grid grid-cols-2 xl:grid-cols-6 gap-2 mx-2;
-  .list-item {
+  .list-item a {
     @apply bg-white shadow-md p-4 flex flex-col items-center;
   }
 }
