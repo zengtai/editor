@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-import { CMS_API, getOrginalData, UPTAP_API } from "../lib/api/v1";
+import { CMS_API, localCache, UPTAP_API } from "../lib/api/v1";
 
 import SearchPanel from "../components/SearchPanel";
 
@@ -172,7 +172,8 @@ export default function Home({ data, originalData }) {
 }
 
 export const getStaticProps = async (ctx) => {
-  const data = await getOrginalData();
+  // const data = await getOrginalData();
+  const data = await localCache();
   const games = data.games;
   const categories = data.categories;
   return {
@@ -181,7 +182,7 @@ export const getStaticProps = async (ctx) => {
         games,
         categories,
       },
-      originalData: [...data.original_data],
+      originalData: [...data.original],
     },
   };
 };
