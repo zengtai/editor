@@ -1,10 +1,10 @@
 import Head from "next/head";
 
-import { CMS_API, localCache, UPTAP_API } from "../lib/api/v1";
+import { CMS_API, localCache, UPTAP_API } from "../../lib/api/v1";
 
-import SearchPanel from "../components/SearchPanel";
+import SearchPanel from "../../components/SearchPanel";
 
-import GameListItem from "../components/GameListItem";
+import GameListItem from "../../components/GameListItem";
 
 export default function Home({ data, originalData }) {
   // console.log("data: ", data);
