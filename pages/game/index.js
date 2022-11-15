@@ -2,12 +2,14 @@ import Head from "next/head";
 
 import { CMS_API, localCache, UPTAP_API } from "../../lib/api/v1";
 
+import { getCategories } from "../../lib/api/v2";
+
 import SearchPanel from "../../components/SearchPanel";
 
 import GameListItem from "../../components/GameListItem";
 
 export default function Home({ data, originalData }) {
-  // console.log("data: ", data);
+  console.log("data: ", data.tmp);
   console.log("originalData: ", originalData.length);
   let dataForSearch = data.games.map((i) => ({
     id: i.appid,
@@ -177,12 +179,38 @@ export const getStaticProps = async (ctx) => {
   const games = data.games;
   const categories = data.categories;
   const search = data.search;
+
+  let cats = await getCategories();
+  console.log(`cats:`, cats);
+
+  function dataForPost(data) {
+    let tmp = [];
+    data.map((i) => {
+      let catId = cats.filter(
+        (cat) => cat.name.replace(/\./, "") === i.category
+      )[0].id;
+      tmp.push({
+        appid: i.appid,
+        title: i.title,
+        slug: i.slug,
+        description: i.description,
+        creation_date: i.creation_date,
+        category: catId,
+      });
+    });
+
+    return tmp;
+  }
+
+  let tmp = dataForPost(games);
+
   return {
     props: {
       data: {
         games,
         categories,
         search,
+        tmp,
       },
       originalData: [...data.original],
     },

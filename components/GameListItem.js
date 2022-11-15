@@ -28,10 +28,10 @@ export default function GameListItem({ data }) {
               </div>
               <div className="meta">
                 <span className="rating bg-star">
-                  {(Math.random() * 2 + 3).toFixed(1)}
+                  {/* {(Math.random() * 2 + 3).toFixed(1)} */}
                 </span>
                 <span className="played">
-                  {(Math.random() * 100 + 10.1).toFixed(1) + `k played`}
+                  {/* {(Math.random() * 100 + 10.1).toFixed(1) + `k played`} */}
                 </span>
               </div>
               <div className="play">

@@ -5,18 +5,87 @@ import { CMS_API, localCache, UPTAP_API } from "../lib/api/v1";
 import SearchPanel from "../components/SearchPanel";
 
 import GameListItem from "../components/GameListItem";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getCategories, getGamesWithAppid, postGames } from "../lib/api/v2";
+
+import { TOP_GAMES } from "../lib/constants";
 
 export default function Home({ data, originalData }) {
-  const [gameData, setGameData] = useState([]);
-  console.log("data: ", data);
-  console.log("originalData: ", originalData.length);
+  const [gameData, setGameData] = useState(``);
+
+  console.log("data: ", data.tmp);
+  console.log("games: ", data.games);
+  console.log("appids: ", data.appids);
+  // console.log("originalData: ", originalData.length);
+
+  let topgames = TOP_GAMES.map((i) => i.appid);
+
+  let gamesDataToPost = [];
+
+  // 玩家数，一定程度上依据发行时间
+  function getPlayed(creation_date, appid) {
+    const now = new Date();
+    const create_date = new Date(creation_date);
+    let base = ((now - create_date) / (1000 * 60 * 60 * 24)).toFixed(1); // 返回发布至今天数
+    let isFeatured = topgames.includes(appid);
+    let max = base * (isFeatured ? 5000 : 500);
+    let min = base * (isFeatured ? 1000 : 100);
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+
+  // 评分，推荐游戏特殊处理
+  function getRating(appid) {
+    let isFeatured = topgames.includes(appid);
+    let max = isFeatured ? 5 : 4.4;
+    let min = isFeatured ? 4.4 : 2.9;
+    return (Math.random() * (max - min) + min).toFixed(1);
+  }
+
+  async function postGamesData() {
+    // 查询是否已存在appid
+    // 1. 获取现有的appid用于比对；2. 每更新一条数据查询一次服务器；3. 啥也不管，直接提交，返回出错信息（因重复而提交失败）
+    // let appids = data.appids;
+
+    // 写数据
+    data.games.map((game) => {
+      let id = data.tmp.find((i) => i.name === game.category)?.id;
+
+      gamesDataToPost.push({
+        appid: game.appid,
+        title: game.title,
+        slug: game.slug,
+        category: { id: id },
+        description: game.description.trim(),
+        rating: getRating(game.appid) * 1,
+        played: `${getPlayed(game.creation_date, game.appid)}`,
+        creation_date: game.creation_date,
+        featured: topgames.includes(game.appid) ? true : false,
+      });
+    });
+
+    // Post 游戏数据
+
+    setGameData(JSON.stringify(gamesDataToPost));
+
+    try {
+      await postGames(gamesDataToPost);
+    } catch (e) {
+      console.error(`postGames() Error: `, e);
+    }
+  }
+
   let dataForSearch = data.games.map((i) => ({
     id: i.appid,
     category: i.category,
     name: i.title,
     slug: i.slug,
   }));
+
+  useEffect(() => {
+    let result = document.querySelector("#result");
+    result.value = gameData;
+  }, [gameData]);
+
   return (
     <>
       <Head>
@@ -52,13 +121,21 @@ export default function Home({ data, originalData }) {
                 </button>
               </div>
               <textarea
-                className="w-full mt-4"
+                id="result"
+                className="w-full mt-4 text-xs font-mono"
                 placeholder="Result"
                 name=""
-                id=""
                 cols="30"
                 rows="10"
               ></textarea>
+              <div>
+                <button
+                  onClick={postGamesData}
+                  className="px-4 bg-sky-500 border border-sky-600 text-white h-full p-2 shadow-lg shadow-sky-200"
+                >
+                  Post Games
+                </button>
+              </div>
             </div>
             <div className="section-head">
               <h2>Custom URL</h2>
@@ -179,12 +256,19 @@ export const getStaticProps = async (ctx) => {
   const games = data.games;
   const categories = data.categories;
   const search = data.search;
+
+  const tmp = await getCategories(); // 获取CMS分类数据
+
+  const appids = await getGamesWithAppid();
+
   return {
     props: {
       data: {
         games,
         categories,
         search,
+        tmp,
+        appids,
       },
       originalData: [...data.original],
     },
