@@ -5,8 +5,10 @@ import { CMS_API, getOrginalData, UPTAP_API } from "../lib/api/v1";
 import SearchPanel from "../components/SearchPanel";
 
 import GameListItem from "../components/GameListItem";
+import { useState } from "react";
 
 export default function Home({ data, originalData }) {
+  const [gameData, setGameData] = useState([]);
   console.log("data: ", data);
   console.log("originalData: ", originalData.length);
   let dataForSearch = data.games.map((i) => ({

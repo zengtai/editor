@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { IMAGE_PATH, IMAGE_FORMAT } from "../lib/constants";
+import Link from "next/link";
+import { IMAGE_PATH, IMAGE_FORMAT, GAME_PATH } from "../lib/constants";
 export default function GameListItem({ data }) {
   return (
     <>
@@ -26,7 +27,9 @@ export default function GameListItem({ data }) {
             </span>
           </div>
           <div className="play">
-            <span>Play</span>
+            <Link href={GAME_PATH + game.appid}>
+              <span>Play</span>
+            </Link>
           </div>
         </li>
       ))}
