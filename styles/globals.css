@@ -3,26 +3,26 @@
 @tailwind utilities;
 
 .section-head {
-  @apply mx-4 flex space-x-2 items-center justify-between;
+  @apply mx-4 flex items-center justify-between space-x-2;
 }
 
 h1,
 h2 {
-  @apply text-xl font-bold my-4;
+  @apply my-4 text-xl font-bold;
 }
 .section-body {
-  @apply mx-2 mb-4 p-4 bg-slate-200 rounded-lg;
+  @apply mx-2 mb-4 rounded-lg bg-slate-200 p-4;
   p {
-    @apply break-words mb-2;
+    @apply mb-2 break-words;
   }
 }
 kbd {
-  @apply border-x border-t border-b-2 shadow-sm p-1 rounded-sm bg-white mx-1 font-serif;
+  @apply mx-1 rounded-sm border-x border-t border-b-2 bg-white p-1 font-serif shadow-sm;
 }
 .category-list {
-  @apply flex gap-4 flex-wrap mx-2 p-4 bg-slate-200 rounded-lg;
+  @apply mx-2 flex flex-wrap gap-4 rounded-lg bg-slate-200 p-4;
   .list-item {
-    @apply py-1 px-2  rounded-md;
+    @apply rounded-md py-1  px-2;
   }
   .current {
     @apply bg-slate-300;
@@ -30,15 +30,15 @@ kbd {
 }
 
 .game-list {
-  @apply grid xl:grid-cols-3 gap-2 mx-2;
+  @apply mx-2 grid gap-2 xl:grid-cols-3;
   .list-item a {
-    @apply bg-white shadow-md p-4 flex space-x-4 text-center xl:hover:rounded-2xl xl:hover:-translate-y-1 xl:transform xl:duration-300;
+    @apply flex space-x-4 bg-white p-4 text-center shadow-md xl:transform xl:duration-300 xl:hover:-translate-y-1 xl:hover:rounded-2xl;
   }
   .info {
     @apply grow;
   }
   .description {
-    @apply text-left border-l pl-4 w-1/2 text-sm overflow-y-auto;
+    @apply w-1/2 overflow-y-auto border-l pl-4 text-left text-sm;
   }
 }
 
@@ -47,24 +47,24 @@ li {
     @apply rounded-lg;
   }
   .meta {
-    @apply flex-col md:flex-row flex mt-3 gap-1 w-full justify-between items-center;
+    @apply mt-3 flex w-full flex-col items-center justify-between gap-1 md:flex-row;
   }
   .rating {
-    @apply pl-7 bg-no-repeat font-semibold;
+    @apply bg-no-repeat pl-7 font-semibold;
   }
   .played {
-    @apply text-gray-400 text-xs;
+    @apply text-xs text-gray-400;
   }
   .play {
     @apply my-3;
     span {
-      @apply py-2 px-4 bg-cyan-600 shadow-md rounded-full text-white;
+      @apply rounded-full bg-cyan-600 py-2 px-4 text-white shadow-md;
     }
   }
   h3 {
-    @apply font-bold text-sm;
+    @apply text-sm font-bold;
   }
   .category {
-    @apply px-1.5 py-1 bg-slate-100 text-xs;
+    @apply bg-slate-100 px-1.5 py-1 text-xs;
   }
 }
