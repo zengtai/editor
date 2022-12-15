@@ -9,7 +9,7 @@ const nextConfig = {
         hostname: `cdn.iwantalipstick.com`,
       },
     ],
-    unoptimized: true,
+    unoptimized: true, // 关闭图片优化
   },
   compiler: {
     removeConsole: process.env.NODE_ENV === "development" ? false : true,
