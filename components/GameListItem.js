@@ -9,15 +9,8 @@ export default function GameListItem({ data }) {
           <Link href={`/game/${game.slug}`}>
             <div className="info">
               <Image
-                className="mx-auto rounded-lg"
-                src={
-                  IMAGE_PATH +
-                  IMAGE_FORMAT +
-                  `/` +
-                  game.appid +
-                  `.` +
-                  IMAGE_FORMAT
-                }
+                className="rounded-lg mx-auto"
+                src={IMAGE_PATH + IMAGE_FORMAT + `/` + game.appid + `.` + IMAGE_FORMAT}
                 width={100}
                 height={100}
                 alt={game.title}
@@ -27,9 +20,7 @@ export default function GameListItem({ data }) {
                 <span className="category">{game.category}</span>
               </div>
               <div className="meta">
-                <span className="rating bg-star">
-                  {/* {(Math.random() * 2 + 3).toFixed(1)} */}
-                </span>
+                <span className="rating bg-star">{/* {(Math.random() * 2 + 3).toFixed(1)} */}</span>
                 <span className="played">
                   {/* {(Math.random() * 100 + 10.1).toFixed(1) + `k played`} */}
                 </span>
@@ -38,10 +29,7 @@ export default function GameListItem({ data }) {
                 <span>Play</span>
               </div>
             </div>
-            <div
-              className="description"
-              title={game.description && game.description}
-            >
+            <div className="description" title={game.description && game.description}>
               {game.description &&
                 (game.description.length < 200
                   ? game.description

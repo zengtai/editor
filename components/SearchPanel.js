@@ -58,11 +58,7 @@ export default function SearchPanel({ data }) {
 
   // console.log(`data: `, data);
   return (
-    <Transition.Root
-      show={isOpen}
-      as={Fragment}
-      afterLeave={() => setQuery("")}
-    >
+    <Transition.Root show={isOpen} as={Fragment} afterLeave={() => setQuery("")}>
       <Dialog
         // open={isOpen}
         onClose={setIsOpen}
@@ -122,10 +118,7 @@ export default function SearchPanel({ data }) {
               />
             </div>
             {filteredGames.length > 0 && (
-              <Combobox.Options
-                static
-                className="py-4 text-sm max-h-96 overflow-y-auto"
-              >
+              <Combobox.Options static className="py-4 text-sm max-h-96 overflow-y-auto">
                 {filteredGames.map((game) => (
                   <Combobox.Option key={game.id} value={game.slug}>
                     {({ active }) => (
@@ -136,30 +129,15 @@ export default function SearchPanel({ data }) {
                       >
                         <Image
                           className="mr-2"
-                          src={
-                            IMAGE_PATH +
-                            IMAGE_FORMAT +
-                            `/` +
-                            game.id +
-                            `.` +
-                            IMAGE_FORMAT
-                          }
+                          src={IMAGE_PATH + IMAGE_FORMAT + `/` + game.id + `.` + IMAGE_FORMAT}
                           width={30}
                           height={30}
                           alt={``}
                         />
-                        <span
-                          className={`font-medium  ${
-                            active ? `text-white` : `text-gray-900`
-                          }`}
-                        >
+                        <span className={`font-medium  ${active ? `text-white` : `text-gray-900`}`}>
                           {game.name}
                         </span>
-                        <span
-                          className={
-                            active ? "text-indigo-200" : "text-gray-400"
-                          }
-                        >
+                        <span className={active ? "text-indigo-200" : "text-gray-400"}>
                           in {game.category}
                         </span>
                       </div>
