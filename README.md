@@ -1,4 +1,4 @@
-# 基础模板
+# 基础模板(非编辑器)
 
 Next.js + TailwindCSS
 
